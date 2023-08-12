@@ -1,9 +1,15 @@
 import React, { useState } from "react";
 import "./Navbar.css";
 import { useGlobalHook } from "../../context/Contexts";
-
+import Modal from "../Modal/Modal";
 const Navbar = () => {
-  const { filtingOnDepartmnetBase, originalData } = useGlobalHook();
+  const {
+    filtingOnDepartmnetBase,
+    originalData,
+    showLowStock,
+    shorting,
+    showModal,
+  } = useGlobalHook();
   const uniqueDepartments = [
     ...new Set(originalData.map((data) => data?.department)),
   ];
@@ -14,7 +20,9 @@ const Navbar = () => {
     setSelectedDepartment(e.target.value);
     filtingOnDepartmnetBase(e.target.value);
   };
-
+  const ourShorting = (e) => {
+    shorting(e.target.value);
+  };
   return (
     <div className="navbar">
       <h2>Products</h2>
@@ -33,16 +41,22 @@ const Navbar = () => {
         </select>
       </div>
       <div className="checkbox">
-        <input type="checkbox" /> low
+        <input type="checkbox" onChange={showLowStock} /> low
       </div>
       <div className="right-drop-down">
-        <select className="select">
+        <select
+          className="select"
+          onChange={ourShorting}
+          value={selectedDepartment}
+        >
           <option value="name">Name</option>
           <option value="price">Price</option>
           <option value="stock">Stock</option>
         </select>
       </div>
-      <button className="button-3">New</button>
+      <button className="button-3" onClick={showModal}>
+        New
+      </button>
     </div>
   );
 };

@@ -1,3 +1,5 @@
+import { act } from "react-dom/test-utils";
+
 const ProductReducer = (state, action) => {
   switch (action.type) {
     case "SET_ORIGINAL_DATA":
@@ -25,6 +27,18 @@ const ProductReducer = (state, action) => {
       return {
         ...state,
         temporaryData: action.payload,
+      };
+    case "UPDATING-ON-CHECKED":
+      return {
+        ...state,
+        temporaryData: [...action.payload],
+      };
+    case "UPDATING-ON-NAME":
+      console.log("check", action.payload);
+      return {
+        ...state,
+        temporaryData: [...action.payload],
+        originalData: [...action.payload],
       };
 
     default:

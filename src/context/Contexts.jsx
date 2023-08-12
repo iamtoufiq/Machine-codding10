@@ -7,6 +7,7 @@ const initialState = {
   temporaryData: [],
   loading: false,
   leftNav: true,
+  showingModal: false,
 };
 const Contexts = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -21,20 +22,74 @@ const Contexts = ({ children }) => {
   const handleNavIconClick = () => {
     dispatch({ type: "SET-LEFT-NAV" });
   };
+  // handle to show modal
+  const showModal = (e) => {
+    console.log(e.target);
+    // dispatch({type:"SHOW_MODAL"})
+  };
   //filtering on the base of departmnet
   const filtingOnDepartmnetBase = (depart) => {
-    if (depart === "All Department") return;
-    let filtered = state.temporaryData.filter((data) => {
-      return data.department === depart;
-    });
-    dispatch({ type: "UPDATING-ON-DEPART-BASE", payload: filtered });
+    console.log(depart);
+    if (depart === "All Department") {
+      dispatch({
+        type: "UPDATING-ON-DEPART-BASE",
+        payload: state?.temporaryData,
+      });
+    } else {
+      let filtered = state.originalData.filter((data) => {
+        return data.department === depart;
+      });
+      dispatch({ type: "UPDATING-ON-DEPART-BASE", payload: filtered });
+    }
+  };
+  // shorting on the base of the price , name and catergory
+  const shorting = (property) => {
+    let sortedData = [...state.temporaryData];
+
+    switch (property) {
+      case "name":
+        sortedData.sort((a, b) => a.name.localeCompare(b.name));
+        break;
+      case "price":
+        sortedData.sort((a, b) => a.price - b.price);
+        break;
+      case "stock":
+        sortedData.sort((a, b) => a.stock - b.stock);
+        break;
+      default:
+        break;
+    }
+
+    // Now you can use the sortedData array
+    dispatch({ type: "UPDATING-ON-NAME", payload: sortedData });
+    console.log(sortedData);
+    // ... further logic ...
+  };
+  // showing low stock item
+  const showLowStock = (e) => {
+    if (e.target.checked) {
+      let checkedVal = state?.temporaryData?.filter((data) => {
+        return data.stock <= 10;
+      });
+      console.log(checkedVal);
+      dispatch({ type: "UPDATING-ON-CHECKED", payload: checkedVal });
+    } else {
+      dispatch({ type: "UPDATING-ON-CHECKED", payload: state?.originalData });
+    }
   };
   useEffect(() => {
     fetchingData();
   }, []);
   return (
     <context.Provider
-      value={{ ...state, handleNavIconClick, filtingOnDepartmnetBase }}
+      value={{
+        ...state,
+        handleNavIconClick,
+        filtingOnDepartmnetBase,
+        showLowStock,
+        shorting,
+        showModal,
+      }}
     >
       {children}
     </context.Provider>
