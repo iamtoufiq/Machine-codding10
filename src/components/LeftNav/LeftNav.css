@@ -1,0 +1,31 @@
+.unorder-list {
+  list-style: none;
+  font-weight: bold;
+  padding: 1rem 2rem;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.left-nav {
+  border: 1px solid red;
+  height: 100vh;
+  background-color: #1f2023;
+  position: relative;
+  color: #fff;
+}
+.unorder-list li:hover {
+  cursor: pointer;
+}
+.navLink {
+  text-decoration: none;
+}
+.icon {
+  font-size: 30px;
+  position: absolute;
+  right: 3px;
+  top: 3px;
+}
+.icon:hover {
+  cursor: pointer;
+}

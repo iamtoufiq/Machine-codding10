@@ -6,6 +6,7 @@ const initialState = {
   originalData: [],
   temporaryData: [],
   loading: false,
+  leftNav: true,
 };
 const Contexts = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -16,10 +17,28 @@ const Contexts = ({ children }) => {
     dispatch({ type: "SET_ORIGINAL_DATA", payload: data?.inventoryData });
     dispatch({ type: "REMOVE_LOADING" });
   };
+
+  const handleNavIconClick = () => {
+    dispatch({ type: "SET-LEFT-NAV" });
+  };
+  //filtering on the base of departmnet
+  const filtingOnDepartmnetBase = (depart) => {
+    if (depart === "All Department") return;
+    let filtered = state.temporaryData.filter((data) => {
+      return data.department === depart;
+    });
+    dispatch({ type: "UPDATING-ON-DEPART-BASE", payload: filtered });
+  };
   useEffect(() => {
     fetchingData();
   }, []);
-  return <context.Provider value={{ ...state }}>{children}</context.Provider>;
+  return (
+    <context.Provider
+      value={{ ...state, handleNavIconClick, filtingOnDepartmnetBase }}
+    >
+      {children}
+    </context.Provider>
+  );
 };
 // Global Hook
 const useGlobalHook = () => {

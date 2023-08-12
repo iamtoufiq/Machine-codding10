@@ -16,6 +16,17 @@ const ProductReducer = (state, action) => {
         ...state,
         loading: false,
       };
+    case "SET-LEFT-NAV":
+      return {
+        ...state,
+        leftNav: !state.leftNav,
+      };
+    case "UPDATING-ON-DEPART-BASE":
+      return {
+        ...state,
+        temporaryData: action.payload,
+      };
+
     default:
       return state;
   }
