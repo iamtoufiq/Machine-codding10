@@ -15,6 +15,7 @@ const Navbar = () => {
   ];
   const [selectedDepartment, setSelectedDepartment] =
     useState("All Department");
+  const [selectedFil, setselectedFil] = useState("name");
 
   const handleDepartmentChange = (e) => {
     setSelectedDepartment(e.target.value);
@@ -29,7 +30,10 @@ const Navbar = () => {
       <div className="drop-down">
         <select
           className="select"
-          onChange={handleDepartmentChange}
+          onChange={(e) => {
+            handleDepartmentChange(e);
+            setSelectedDepartment(e.target.value);
+          }}
           value={selectedDepartment}
         >
           <option value="All Department">All Department</option>
@@ -46,14 +50,18 @@ const Navbar = () => {
       <div className="right-drop-down">
         <select
           className="select"
-          onChange={ourShorting}
-          value={selectedDepartment}
+          onChange={(e) => {
+            ourShorting(e);
+            setselectedFil(e.target.value);
+          }}
+          value={selectedFil}
         >
           <option value="name">Name</option>
           <option value="price">Price</option>
           <option value="stock">Stock</option>
         </select>
       </div>
+
       <button className="button-3" onClick={showModal}>
         New
       </button>

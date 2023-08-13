@@ -1,10 +1,10 @@
 import React from "react";
 import "./ItemListing.css";
 import { useGlobalHook } from "../../context/Contexts";
-
+import { Link } from "react-router-dom";
 const ItemListing = () => {
   const { temporaryData } = useGlobalHook();
-
+  // "/details/:id"
   return (
     <div className="ItemListing">
       <table>
@@ -24,7 +24,9 @@ const ItemListing = () => {
               <td>
                 <img className="image-url" src={data.imageUrl} alt="" />
               </td>
-              <td>{data.name}</td>
+              <td>
+                <Link to={`/details/${data.id}`}> {data.name}</Link>
+              </td>
               <td>{data.description}</td>
               <td>{data.price}</td>
               <td>{data.stock}</td>

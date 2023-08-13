@@ -33,7 +33,7 @@ const Contexts = ({ children }) => {
     if (depart === "All Department") {
       dispatch({
         type: "UPDATING-ON-DEPART-BASE",
-        payload: state?.temporaryData,
+        payload: state?.originalData,
       });
     } else {
       let filtered = state.originalData.filter((data) => {
