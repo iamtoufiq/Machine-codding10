@@ -23,9 +23,11 @@ const Contexts = ({ children }) => {
     dispatch({ type: "SET-LEFT-NAV" });
   };
   // handle to show modal
-  const showModal = (e) => {
-    console.log(e.target);
-    // dispatch({type:"SHOW_MODAL"})
+  const showModal = (value) => {
+    dispatch({
+      type: "UPDATING-POPUP-MODAL",
+      payload: value,
+    });
   };
   //filtering on the base of departmnet
   const filtingOnDepartmnetBase = (depart) => {

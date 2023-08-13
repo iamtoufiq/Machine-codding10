@@ -9,6 +9,7 @@ const Navbar = () => {
     showLowStock,
     shorting,
     showModal,
+    showingModal,
   } = useGlobalHook();
   const uniqueDepartments = [
     ...new Set(originalData.map((data) => data?.department)),
@@ -24,8 +25,10 @@ const Navbar = () => {
   const ourShorting = (e) => {
     shorting(e.target.value);
   };
+  console.log("navbar", showingModal);
   return (
     <div className="navbar">
+      {showingModal && <Modal />}
       <h2>Products</h2>
       <div className="drop-down">
         <select
@@ -62,7 +65,7 @@ const Navbar = () => {
         </select>
       </div>
 
-      <button className="button-3" onClick={showModal}>
+      <button className="button-3" onClick={() => showModal(true)}>
         New
       </button>
     </div>

@@ -1,66 +1,76 @@
 import React, { useState } from "react";
-
-const Modal = ({ isOpen, onClose, onSubmit }) => {
-  const [imageUrl, setImageUrl] = useState("");
-  const [name, setName] = useState("");
-  const [description, setDescription] = useState("");
-  const [price, setPrice] = useState("");
-  const [supplier, setSupplier] = useState("");
-
-  if (!isOpen) {
-    return null;
-  }
-
-  const handleSubmit = () => {
-    const newItem = {
-      imageUrl,
-      name,
-      description,
-      price,
-      supplier,
-    };
-    onSubmit(newItem);
-    onClose();
+import "./Moddal.css";
+import { useGlobalHook } from "../../context/Contexts";
+const Modal = () => {
+  const { showModal, originalData } = useGlobalHook();
+  const [modalData, setModalData] = useState({
+    id: originalData?.length + 1,
+    department: "Kitchen",
+    name: "Stainless Steel Cookware Set",
+    description:
+      "A set of high-quality stainless steel cookware including pots and pans.",
+    price: 149.99,
+    stock: 15,
+    sku: "KITCH001",
+    supplier: "KitchenWonders Inc.",
+    delivered: 15,
+    imageUrl: "https://m.media-amazon.com/images/I/616vJsA33kL.jpg",
+  });
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(modalData);
   };
-
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-40 flex justify-center items-center">
-      <div className="bg-white p-6 rounded-lg">
-        <h2 className="text-lg font-semibold mb-4">Add New Item</h2>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Image URL
-          </label>
+    <div id="myModal" className="modal">
+      <div className="modal-content">
+        <span
+          className="close"
+          id="closeModalBtn"
+          onClick={() => showModal(false)}
+        >
+          &times;
+        </span>
+        <h2>Add New product</h2>
+        <form>
+          {/* <input type="text" placeholder="Input 1" /> */}
+          <span>Department:</span>
+          <select name="" id="">
+            <option value="">Kitchen</option>
+            <option value="">Clothing</option>
+            <option value="">Toys</option>
+          </select>
+          <span>Name:</span>
           <input
             type="text"
-            className="mt-1 p-2 w-full border rounded"
-            value={imageUrl}
-            onChange={(e) => setImageUrl(e.target.value)}
+            placeholder="Name.."
+            value={modalData?.name}
+            onChange={(e) => setModalData(e.target.value)}
           />
-        </div>
-        <div className="mb-4">
-          <label className="block text-sm font-medium text-gray-700">
-            Name
-          </label>
-          <input
-            type="text"
-            className="mt-1 p-2 w-full border rounded"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        {/* Add similar fields for description, price, and supplier */}
-        <div className="flex justify-end">
-          <button
-            className="px-4 py-2 bg-blue-500 text-white rounded mr-2"
-            onClick={handleSubmit}
-          >
-            Save
+          <span>Description:</span>
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="2"
+            value={modalData?.description}
+            onChange={(e) => setModalData(e.target.value)}
+          ></textarea>
+          <span>Price:</span>
+          <input type="text" placeholder="Price.." value={0} />
+          <span>Stock:</span>
+          <input type="text" placeholder="Stock.." value={0} />
+          <span>SKU:</span>
+          <input type="text" placeholder="SKU.." />
+          <span>Suppler:</span>
+          <input type="text" placeholder="Suppler.." />
+          <span>Delivered:</span>
+          <input type="text" placeholder="Delivered.." value={0} />
+          <span>ImageUrl:</span>
+          <input type="text" placeholder="ImageUrl.." />
+          <button type="submit" className="button-3" onClick={handleSubmit}>
+            Submit
           </button>
-          <button className="px-4 py-2 bg-gray-300 rounded" onClick={onClose}>
-            Cancel
-          </button>
-        </div>
+        </form>
       </div>
     </div>
   );

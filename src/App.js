@@ -5,6 +5,7 @@ import Departments from "./pages/Departments/Departments";
 import Product from "./pages/Products/Product";
 import Error from "./pages/Error/Error";
 import SingleProduct from "./pages/singleProduct/SingleProduct";
+
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 const App = () => {
   return (

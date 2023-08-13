@@ -33,6 +33,11 @@ const ProductReducer = (state, action) => {
         ...state,
         temporaryData: [...action.payload],
       };
+    case "UPDATING-POPUP-MODAL":
+      return {
+        ...state,
+        showingModal: action.payload,
+      };
     case "UPDATING-ON-NAME":
       console.log("check", action.payload);
       return {

@@ -1,0 +1,99 @@
+.modal-content h2 {
+  margin-bottom: 1rem;
+}
+.modal-content {
+  position: relative;
+}
+#myModal {
+  width: 40vw;
+  position: absolute;
+  z-index: 5;
+  left: 50%;
+  top: -30%;
+  background-color: whitesmoke;
+  box-shadow: rgba(17, 17, 26, 0.05) 0px 1px 0px,
+    rgba(17, 17, 26, 0.1) 0px 0px 8px;
+  padding: 2rem;
+  margin: 0 auto;
+  transform: translate(-40%, 30%);
+}
+form {
+  display: flex;
+  flex-direction: column;
+
+  gap: 5px;
+}
+input,
+select,
+textarea {
+  padding: 5px;
+  outline: none;
+}
+#closeModalBtn {
+  position: absolute;
+  font-size: 40px;
+  right: 2px;
+  top: -5px;
+  color: black;
+  font-weight: bold;
+  transition: all 0.2s ease-in-out;
+}
+#closeModalBtn:hover {
+  cursor: pointer;
+  color: red;
+}
+
+.button-3 {
+  appearance: none;
+  background-color: rgb(1, 122, 254);
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  border-radius: 6px;
+  box-shadow: rgba(27, 31, 35, 0.1) 0 1px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial,
+    sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 20px;
+  padding: 6px 16px;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+.button-3:focus:not(:focus-visible):not(.focus-visible) {
+  box-shadow: none;
+  outline: none;
+}
+
+.button-3:hover {
+  background-color: rgb(12, 87, 167);
+}
+
+.button-3:focus {
+  box-shadow: rgb(67, 147, 231) 0 0 0 3px;
+  outline: none;
+}
+
+.button-3:disabled {
+  background-color: rgb(165, 201, 240);
+  border-color: rgba(27, 31, 35, 0.1);
+  color: rgba(255, 255, 255, 0.8);
+  cursor: default;
+}
+
+.button-3:active {
+  background-color: rgb(110, 158, 209);
+  box-shadow: rgba(20, 70, 32, 0.2) 0 1px 0 inset;
+}
+input:last-of-type {
+  margin-bottom: 1rem;
+}
